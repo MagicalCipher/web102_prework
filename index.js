@@ -28,28 +28,47 @@ const gamesContainer = document.getElementById("games-container");
 // create a function that adds all data from the games array to the page
 function addGamesToPage(games) {
 
+    const h2Elements = document.querySelectorAll('h2');
+
+    let h2ourGames;
+    for (let h2 of h2Elements) {
+        if (h2.textContent === 'Our Games') 
+        {
+            h2ourGames = h2;
+            break;
+        }
+    }
+
     // loop over each item in the data
         for (i = 0; i < games.length; i++) {
             const game = games[i];
-        }
-
-        // create a new div element, which will become the game card
-
-
-        // add the class game-card to the list
-
-
+             
+            // create a new div element, which will become the game card
+            const gameCard = document.createElement('div');
+             // add the class game-card to the list
+            gameCard.classList.add('game-card');
+        
         // set the inner HTML using a template literal to display some info 
         // about each game
+        const displayGameInfo = `
+            <div class= "game-card">
+                <h3> ${games.name} is described as ${games.description} and is striving to reach ${games.goal} goals  </h3>
+                <img src="${games.img}" class="game-img">
+            </div>
+        `;
+        gameCard.innerHTML = displayGameInfo;
         // TIP: if your images are not displaying, make sure there is space
         // between the end of the src attribute and the end of the tag ("/>")
 
 
         // append the game to the games-container
-
+        h2ourGames.insertAdjacentElement('afterend', gameCard);
+        }
 }
 
 // call the function we just defined using the correct variable
+addGamesToPage(games);
+
 // later, we'll call this function using a different list of games
 
 
